@@ -52,9 +52,9 @@ public class HomeController {
 //                         ){
     	List<Item> list;
     	if(keyword.isPresent()){
-    		if(radiocheck == "商品名") {
+    		if(radiocheck.equals("商品名")) {
     			list = itemRepository.findByNameContainsOrderByIdAsc(keyword.get());
-    		}else if(radiocheck == "商品説明") {
+    		}else if(radiocheck.equals("商品説明")) {
     			list = itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get());
     		}else {
     			list = itemRepository.findByDescriptionOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
