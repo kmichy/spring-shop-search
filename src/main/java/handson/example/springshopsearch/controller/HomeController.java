@@ -47,25 +47,33 @@ public class HomeController {
     public String index(
             Model model,
             @RequestParam(name = "keyword", required = false) Optional<String> keyword
-          , @RequestParam(name = "radiocheck", required = false) String radiocheck) {
+          , @RequestParam(name = "radiocheck", required = false) Optional<String> radiocheck) {
     	List<Item> list;
-    	if(keyword.isPresent()){
-    		if(radiocheck.equals("商品名")) {
-    			list = itemRepository.findByNameContainsOrderByIdAsc(keyword.get());
-    		}else if(radiocheck.equals("商品説明")) {
-    			list = itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get());
+
+		if(radiocheck.isPresent()) {
+            model.addAttribute("radiocheck",radiocheck.get());
+			if(keyword.isPresent()){
+    			if(radiocheck.get().equals("商品名")) {
+        			list = itemRepository.findByNameContainsOrderByIdAsc(keyword.get());
+        		}else if(radiocheck.get().equals("商品説明")) {
+        			list = itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get());
+        		}else {
+        			list = itemRepository.findByDescriptionContainsOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
+                    model.addAttribute("radiocheck","商品名または商品説明");
+        		}
     		}else {
-    			list = itemRepository.findByDescriptionContainsOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
+        		list = itemRepository.findAll();
     		}
     	}else {
-    		list = itemRepository.findAll();
+            model.addAttribute("radiocheck","商品名または商品説明");
+    		if(keyword.isPresent()) {
+    			list = itemRepository.findByDescriptionContainsOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
+    		}else {
+        		list = itemRepository.findAll();
+    		}
     	}
-    	if(radiocheck == null) {
-    		radiocheck = "商品名または商品説明";
-    	}
-		System.out.println(radiocheck);
+
         model.addAttribute("items", list);
-        model.addAttribute("radiocheck",radiocheck);
         return "index";
     }
 }
