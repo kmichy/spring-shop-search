@@ -49,7 +49,7 @@ public class HomeController {
             @RequestParam(name = "keyword", required = false) Optional<String> keyword
           , @RequestParam(name = "radiocheck", required = false) Optional<String> radiocheck) {
     	List<Item> list;
-
+        String error = "商品名または商品説明";
 		if(radiocheck.isPresent()) {
             model.addAttribute("radiocheck",radiocheck.get());
 			if(keyword.isPresent()){
@@ -59,13 +59,13 @@ public class HomeController {
         			list = itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get());
         		}else {
         			list = itemRepository.findByDescriptionContainsOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
-                    model.addAttribute("radiocheck","商品名または商品説明");
+                    model.addAttribute("radiocheck",error);
         		}
     		}else {
         		list = itemRepository.findAll();
     		}
     	}else {
-            model.addAttribute("radiocheck","商品名または商品説明");
+            model.addAttribute("radiocheck",error);
     		if(keyword.isPresent()) {
     			list = itemRepository.findByDescriptionContainsOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
     		}else {
