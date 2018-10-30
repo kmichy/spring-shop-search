@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByNameContainsOrderByIdAsc(String keyword);
     List<Item> findByDescriptionContainsOrderByIdAsc(String keyword);
-    List<Item> findByDescriptionOrNameContainsOrderByIdAsc(String keyword,String keyword2);
+	List<Item> findByDescriptionContainsOrNameContainsOrderByIdAsc(String keyword, String keyword2);
 }

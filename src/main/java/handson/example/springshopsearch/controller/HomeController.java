@@ -1,6 +1,5 @@
 package handson.example.springshopsearch.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +56,7 @@ public class HomeController {
     		}else if(radiocheck.equals("商品説明")) {
     			list = itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get());
     		}else {
-    			list = itemRepository.findByDescriptionOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
+    			list = itemRepository.findByDescriptionContainsOrNameContainsOrderByIdAsc(keyword.get(),keyword.get());
     		}
     	}else {
     		list = itemRepository.findAll();
