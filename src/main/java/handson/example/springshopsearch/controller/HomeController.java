@@ -47,8 +47,7 @@ public class HomeController {
     public String index(
             Model model,
             @RequestParam(name = "keyword", required = false) Optional<String> keyword
-          ,@RequestParam(name = "radiocheck", required = false) String radiocheck) {
-//                         ){
+          , @RequestParam(name = "radiocheck", required = false) String radiocheck) {
     	List<Item> list;
     	if(keyword.isPresent()){
     		if(radiocheck.equals("商品名")) {
@@ -61,14 +60,12 @@ public class HomeController {
     	}else {
     		list = itemRepository.findAll();
     	}
-//        List<Item> list = keyword.isPresent()
-//        	//↓ = where item.name like '%Hoge%'
-//          ? itemRepository.findByNameContainsOrderByIdAsc(keyword.get())
-//	      : itemRepository.findAll();
-//          ? itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get())
-//        	? itemRepository.findByDescriptionOrNameContainsOrderByIdAsc(keyword.get(),keyword.get())
-
+    	if(radiocheck == null) {
+    		radiocheck = "商品名または商品説明";
+    	}
+		System.out.println(radiocheck);
         model.addAttribute("items", list);
+        model.addAttribute("radiocheck",radiocheck);
         return "index";
     }
 }

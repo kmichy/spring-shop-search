@@ -11,9 +11,9 @@
         <form>
             <div class="form-group">
                 <div class="input-group">
-					<input type="radio" name="radiocheck" value="商品名または商品説明" checked> 商品名または商品説明から探す
-					<input type="radio" name="radiocheck" value="商品名"> 商品名から探す
-					<input type="radio" name="radiocheck" value="商品説明"> 商品説明から探す
+					<input type="radio" th:name="radiocheck" value="商品名または商品説明" th:checked="${radiocheck}==商品名または商品説明"> 商品名または商品説明から探す
+					<input type="radio" name="radiocheck" value="商品名" th:checked="${radiocheck}==商品名"> 商品名から探す
+					<input type="radio" name="radiocheck" value="商品説明" th:checked="${radiocheck}==商品説明"> 商品説明から探す
                     <input type="text" class="form-control" placeholder="検索ワードを入力…" name="keyword">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">検索</button>
