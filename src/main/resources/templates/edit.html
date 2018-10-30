@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/header.html::header"/>
 <body>
-<div th:replace="common/navbar.html::navbar"></div>
+ <div th:replace="common/navbar.html::navbar"></div>
 <div class="container">
 <div th:object="${item}">
+  <form method="post">
     <div class="row">
         <div class="col-md-4">
             <img th:src="@{/images/default.png}" alt="IMAGE NOT SET" width="200" height="200" align="center">
@@ -13,23 +14,20 @@
             <p class="h5">
                 商品番号： [[ *{id} ]]
             </p>
-            <p class="mt-5 h2">
-                [[ *{name} ]]
+            <p class="mt-5">
+                商品名:<input type="text" class="form-control" th:value="*{name}" name="name">
             </p>
             <p>
-                価格： [[ *{price} ]] Yen
+                価格：<input type="text" class="form-control" th:value="*{price}" name="price"> Yen
             </p>
         </div>
     </div>
     <div class="row mt-5 mr-1 ml-1">
-        <p th:text="*{description}"></p>
-<!--         <small class="text-muted">テキストは Wikipedia からの抜粋です。</small> -->
-    </div>
-</div>
+        <input type="text" class="form-control" th:value="*{description}" name="description">
+               <button class="test" type="submit">完了</button>
+  </form>
 
-<a th:href="@{/items/edit/{id}(id=*{id})}">
-     <button class="test">編集</button>
-</a>
+    </div>
 </div>
 </body>
 </html>

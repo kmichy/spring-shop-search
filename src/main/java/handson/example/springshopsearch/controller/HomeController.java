@@ -63,11 +63,11 @@ public class HomeController {
     		list = itemRepository.findAll();
     	}
 //        List<Item> list = keyword.isPresent()
-//        		//↓ = where item.name like '%Hoge%'
+//        	//↓ = where item.name like '%Hoge%'
 //          ? itemRepository.findByNameContainsOrderByIdAsc(keyword.get())
 //	      : itemRepository.findAll();
-////                ? itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get())
-//        			? itemRepository.findByDescriptionOrNameContainsOrderByIdAsc(keyword.get(),keyword.get())
+//          ? itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get())
+//        	? itemRepository.findByDescriptionOrNameContainsOrderByIdAsc(keyword.get(),keyword.get())
 
         model.addAttribute("items", list);
         return "index";
